@@ -385,13 +385,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716067717}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0, y: 0.38371006, z: -0, w: 0.9234536}
+  m_LocalPosition: {x: 1.57, y: 1, z: 10.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45.127, z: 0}
 --- !u!1 &948946839
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,6 +829,7 @@ GameObject:
   - component: {fileID: 1046525453223059228}
   - component: {fileID: 1050066405829249965}
   - component: {fileID: 1050066405829249966}
+  - component: {fileID: 1050066405829249967}
   m_Layer: 0
   m_Name: Car_4
   m_TagString: Untagged
@@ -884,6 +885,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.50200963, z: 2.577568}
   m_Center: {x: 0, y: 0.4149518, z: 0.027572632}
+--- !u!114 &1050066405829249967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050066405829249964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d22c941bbc7d714449f90542a8a25888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transformFrontLeft: {fileID: 1051614507634433948}
+  _transformFrontRight: {fileID: 1046527859473495008}
+  _transformBackLeft: {fileID: 1046562837101224348}
+  _transformBackRight: {fileID: 1051764829633914248}
+  _colliderFrontLeft: {fileID: 432939887}
+  _colliderFrontRight: {fileID: 1122639510}
+  _colliderBackLeft: {fileID: 948946841}
+  _colliderBackRight: {fileID: 341361839}
+  _force: 2000
+  _maxAngle: 30
 --- !u!1 &1050168514338695320
 GameObject:
   m_ObjectHideFlags: 0
