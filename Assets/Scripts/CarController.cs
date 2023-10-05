@@ -16,6 +16,7 @@ public class CarController : MonoBehaviour
 
     [SerializeField] private float _force;
     [SerializeField] private float _maxAngle;
+    [SerializeField] private float _shiftBoostForce;
 
 
     private void FixedUpdate()
@@ -23,6 +24,17 @@ public class CarController : MonoBehaviour
         //Ускорение
         _colliderFrontLeft.motorTorque = Input.GetAxis("Vertical") * _force;
         _colliderFrontRight.motorTorque = Input.GetAxis("Vertical") * _force;
+        float acceleration = Input.GetAxis("Vertical") * _force;
+
+        // Ускорение с клавишей Shift
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            acceleration *= _shiftBoostForce;
+        }
+
+        _colliderFrontLeft.motorTorque = acceleration;
+        _colliderFrontRight.motorTorque = acceleration;
+        
 
         // Ручной тормоз
         if (Input.GetKey(KeyCode.Space))
