@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class CarSpawner : MonoBehaviour
 {
     public GameObject[] carPrefabs;
+    public int carToSpawn;
 
     private void Start()
     {

@@ -34,20 +34,16 @@ public class CarController : MonoBehaviour
 
         _colliderFrontLeft.motorTorque = acceleration;
         _colliderFrontRight.motorTorque = acceleration;
-        
+
 
         // Ручной тормоз
         if (Input.GetKey(KeyCode.Space))
         {
-            _colliderFrontLeft.brakeTorque = 3000f;
-            _colliderFrontRight.brakeTorque = 3000f;
             _colliderBackLeft.brakeTorque = 3000f;
             _colliderBackRight.brakeTorque = 3000f;
         }
         else
         {
-            _colliderFrontLeft.brakeTorque = 0f;
-            _colliderFrontRight.brakeTorque = 0f;
             _colliderBackLeft.brakeTorque = 0f;
             _colliderBackRight.brakeTorque = 0f;
         }
