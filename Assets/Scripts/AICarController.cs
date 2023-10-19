@@ -2,37 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-
 public class AICarController : MonoBehaviour
 {
-    Rigidbody rb;
+    [SerializeField] private float movementSpeed = 1f;
+    [SerializeField] private float rotationSpeed = 120f;
+    [SerializeField] private float stopDistance = 2.5f;
+    [SerializeField] public bool reachedDestination;
+    [SerializeField] private Vector3 destination;
+    private Vector3 lastPosition; // Added a missing declaration for lastPosition
+    private Vector3 velocity; // Added a missing declaration for velocity
 
-
-    [SerializeField] private float power = 5;
-    [SerializeField] private float torque = 0.5f;
-    [SerializeField] private float maxSpeed = 5;
-
-
-    [SerializeField] private Vector2 movementVector;
-
-
-    private void Awake()
+    // Update is called once per frame
+    void Update()
     {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    public void Move(Vector2 movementInput)
-    {
-        this.movementVector = movementInput;
-    }
-
-    private void FixedUpdate()
-    {
-        if (rb.velocity.magnitude < maxSpeed)
+        if (transform.position != destination)
         {
-            rb.AddRelativeForce(Vector3.forward * movementVector.y * power);
+            Vector3 destinationDirection = destination - transform.position;
+            destinationDirection.y = 0;
+
+            float destinationDistance = destinationDirection.magnitude;
+
+            if (destinationDistance >= stopDistance)
+            {
+                reachedDestination = false;
+                Quaternion targetRotation = Quaternion.LookRotation(destinationDirection);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
+            }
+            else
+            {
+                reachedDestination = true;
+            }
+
+            velocity = (transform.position - lastPosition) / Time.deltaTime;
+            velocity.y = 0;
+            float velocityMagnitude = velocity.magnitude;
+            velocity = velocity.normalized;
+            lastPosition = transform.position; // Update lastPosition
         }
-        rb.AddRelativeTorque(Vector3.up * movementVector.x * torque * movementVector.y);
+    }
+
+    public void SetDestination(Vector3 newDestination)
+    {
+        destination = newDestination;
+        reachedDestination = false;
     }
 }
+
