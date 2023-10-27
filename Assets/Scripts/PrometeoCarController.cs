@@ -28,14 +28,16 @@ public class PrometeoCarController : MonoBehaviour
       public int maxReverseSpeed = 45; //The maximum speed that the car can reach while going on reverse in km/h.
       [Range(1, 10)]
       public int accelerationMultiplier = 2; // How fast the car can accelerate. 1 is a slow acceleration and 10 is the fastest.
-      [Space(10)]
-      [Range(10, 45)]
-      public int maxSteeringAngle = 27; // The maximum angle that the tires can reach while rotating the steering wheel.
+    [Space(10)]
+    [Range (1, 10)]
+    public int boost = 10;
+    [Range(10, 45)]
+    public int maxSteeringAngle = 27; // The maximum angle that the tires can reach while rotating the steering wheel.
       [Range(0.1f, 1f)]
       public float steeringSpeed = 0.5f; // How fast the steering wheel turns.
       [Space(10)]
       [Range(100, 600)]
-      public int brakeForce = 350; // The strength of the wheel brakes.
+      public int brakeForce = 350; // The strength of the wheel brakes.      
       [Range(1, 10)]
       public int decelerationMultiplier = 2; // How fast the car decelerates when the user is not using the throttle.
       [Range(1, 10)]
@@ -45,6 +47,7 @@ public class PrometeoCarController : MonoBehaviour
                                     // in the points x = 0 and z = 0 of your car. You can select the value that you want in the y axis,
                                     // however, you must notice that the higher this value is, the more unstable the car becomes.
                                     // Usually the y value goes from 0 to 1.5.
+
 
     //WHEELS
 
@@ -79,10 +82,14 @@ public class PrometeoCarController : MonoBehaviour
       public ParticleSystem RLWParticleSystem;
       public ParticleSystem RRWParticleSystem;
 
+
       [Space(10)]
       // The following trail renderers are used as tire skids when the car loses traction.
       public TrailRenderer RLWTireSkid;
       public TrailRenderer RRWTireSkid;
+
+    [Space(10)]
+    public ParticleSystem nitroParticleSystem;
 
     //SPEED TEXT (UI)
 
@@ -102,6 +109,7 @@ public class PrometeoCarController : MonoBehaviour
       public bool useSounds = false;
       public AudioSource carEngineSound; // This variable stores the sound of the car engine.
       public AudioSource tireScreechSound; // This variable stores the sound of the tire screech (when the car is drifting).
+    public AudioSource nitroBoostSound;
       float initialCarEngineSoundPitch; // Used to store the initial pitch of the car engine sound.
 
     //CONTROLS
@@ -144,12 +152,14 @@ public class PrometeoCarController : MonoBehaviour
       float localVelocityX;
       bool deceleratingCar;
       bool touchControlsSetup = false;
-      /*
-      The following variables are used to store information about sideways friction of the wheels (such as
-      extremumSlip,extremumValue, asymptoteSlip, asymptoteValue and stiffness). We change this values to
-      make the car to start drifting.
-      */
-      WheelFrictionCurve FLwheelFriction;
+    private bool isBoosting = false;
+
+    /*
+    The following variables are used to store information about sideways friction of the wheels (such as
+    extremumSlip,extremumValue, asymptoteSlip, asymptoteValue and stiffness). We change this values to
+    make the car to start drifting.
+    */
+    WheelFrictionCurve FLwheelFriction;
       float FLWextremumSlip;
       WheelFrictionCurve FRwheelFriction;
       float FRWextremumSlip;
@@ -352,7 +362,15 @@ public class PrometeoCarController : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.Space)){
           RecoverTraction();
         }
-        if((!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))){
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+           isBoosting = true;
+        }
+        else
+        {
+           isBoosting = false;
+        }
+        if ((!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))){
           ThrottleOff();
         }
         if((!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W)) && !Input.GetKey(KeyCode.Space) && !deceleratingCar){
@@ -497,9 +515,25 @@ public class PrometeoCarController : MonoBehaviour
 
     // This method apply positive torque to the wheels in order to go forward.
     public void GoForward(){
-      //If the forces aplied to the rigidbody in the 'x' asis are greater than
-      //3f, it means that the car is losing traction, then the car will start emitting particle systems.
-      if(Mathf.Abs(localVelocityX) > 2.5f){
+        //If the forces aplied to the rigidbody in the 'x' asis are greater than
+        //3f, it means that the car is losing traction, then the car will start emitting particle systems.
+        if (isBoosting == true && Mathf.RoundToInt(carSpeed) < maxSpeed) 
+        {
+            // Apply extra torque for boosting (adjust the multiplier as needed)
+            frontLeftCollider.motorTorque = (accelerationMultiplier * 50f) * boost *  throttleAxis;
+            frontRightCollider.motorTorque = (accelerationMultiplier * 50f) * boost * throttleAxis;
+            rearLeftCollider.motorTorque = (accelerationMultiplier * 50f) * boost * throttleAxis;
+            rearRightCollider.motorTorque = (accelerationMultiplier * 50f) * boost * throttleAxis;
+        }
+        else
+        {
+            // Apply normal torque
+            frontLeftCollider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+            frontRightCollider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+            rearLeftCollider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+            rearRightCollider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+        }
+        if (Mathf.Abs(localVelocityX) > 2.5f){
         isDrifting = true;
         DriftCarPS();
       }else{
