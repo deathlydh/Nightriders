@@ -152,7 +152,8 @@ public class PrometeoCarController : MonoBehaviour
       float localVelocityX;
       bool deceleratingCar;
       bool touchControlsSetup = false;
-    private bool isBoosting = false;
+     bool isBoosting = false;
+     bool isShiftPressed = false;
 
     /*
     The following variables are used to store information about sideways friction of the wheels (such as
@@ -234,6 +235,10 @@ public class PrometeoCarController : MonoBehaviour
           if(tireScreechSound != null){
             tireScreechSound.Stop();
           }
+          if(nitroBoostSound != null)
+            {
+                nitroBoostSound.Stop();
+            }
         }
 
         if(!useEffects){
@@ -415,7 +420,21 @@ public class PrometeoCarController : MonoBehaviour
             float engineSoundPitch = initialCarEngineSoundPitch + (Mathf.Abs(carRigidbody.velocity.magnitude) / 25f);
             carEngineSound.pitch = engineSoundPitch;
           }
-          if((isDrifting) || (isTractionLocked && Mathf.Abs(carSpeed) > 12f)){
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    if (nitroBoostSound != null && !nitroBoostSound.isPlaying)
+                    {
+                        nitroBoostSound.Play();
+                    }
+                }
+                else
+                {
+                    if (nitroBoostSound != null && nitroBoostSound.isPlaying)
+                    {
+                        nitroBoostSound.Stop();
+                    }
+                }
+                if ((isDrifting) || (isTractionLocked && Mathf.Abs(carSpeed) > 12f)){
             if(!tireScreechSound.isPlaying){
               tireScreechSound.Play();
             }
@@ -432,6 +451,10 @@ public class PrometeoCarController : MonoBehaviour
         if(tireScreechSound != null && tireScreechSound.isPlaying){
           tireScreechSound.Stop();
         }
+        if(nitroBoostSound != null && nitroBoostSound.isPlaying)
+            {
+                nitroBoostSound.Stop();
+            }
       }
 
     }
