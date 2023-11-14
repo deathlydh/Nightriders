@@ -6,13 +6,16 @@ public class RespawnOnKeyPress1 : MonoBehaviour
     public string roadTag = "road"; // тег объекта дороги
     public float maxDistance = 100f; // максимальное расстояние, на котором искать дорогу
     public LayerMask roadLayer; // слой объекта дороги
+    public float teleportDelay = 30f; // задержка телепортации в секундах
+    private float lastTeleportTime;
 
     private void Update()
     {
-        if (Input.GetKeyDown(respawnKey))
+        if (Input.GetKeyDown(respawnKey) && Time.time - lastTeleportTime > teleportDelay)
         {
             Debug.Log("R key pressed");
             Respawn();
+            lastTeleportTime = Time.time; // обновляем время последней телепортации
         }
     }
 
@@ -36,14 +39,14 @@ public class RespawnOnKeyPress1 : MonoBehaviour
                 }
             }
 
-            // Теперь телепортируемся на ближайший объект
+            // Теперь телепортируемся на ближайший объект с учетом смещения и обновляем время телепортации
             transform.position = closestCollider.transform.position + Vector3.up * 0.5f;
             Debug.Log("Teleported to the closest object with tag: " + closestCollider.gameObject.tag);
+            lastTeleportTime = Time.time; // обновляем время последней телепортации
         }
         else
         {
             Debug.LogWarning("No road found nearby.");
         }
     }
-
 }
