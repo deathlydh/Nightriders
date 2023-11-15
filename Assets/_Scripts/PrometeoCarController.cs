@@ -100,6 +100,7 @@ public class PrometeoCarController : MonoBehaviour
     public bool useUI = false;
     public Text carSpeedText; // Used to store the UI object that is going to show the speed of the car.
     public Text driftPointsText;
+    public Text savedScore;
 
     //SOUNDS
 
@@ -157,6 +158,9 @@ public class PrometeoCarController : MonoBehaviour
     bool touchControlsSetup = false;
     bool isBoosting = false;
     bool isShiftPressed = false;
+    float timeWithoutDrift = 5.0f;
+    private int savedPoints = 0;
+    private Coroutine pointsCoroutine;
 
     /*
     The following variables are used to store information about sideways friction of the wheels (such as
@@ -237,6 +241,10 @@ public class PrometeoCarController : MonoBehaviour
             {
                 driftPointsText.text = "0";
             }
+            if (savedScore != null)
+            {
+                savedScore.text = "0";
+            }
         }
 
         if (useSounds)
@@ -316,8 +324,24 @@ public class PrometeoCarController : MonoBehaviour
         localVelocityX = transform.InverseTransformDirection(carRigidbody.velocity).x;
         // Save the local velocity of the car in the z axis. Used to know if the car is going forward or backwards.
         localVelocityZ = transform.InverseTransformDirection(carRigidbody.velocity).z;
-        AddPointsIfDrifting();
-       
+        if (!isDrifting)
+        {
+            if (pointsCoroutine == null)
+            {
+                pointsCoroutine = StartCoroutine(SavePointsAfterDelay());
+            }
+        }
+        else
+        {
+            if (pointsCoroutine != null)
+            {
+                StopCoroutine(pointsCoroutine);
+                pointsCoroutine = null;
+            }
+
+            AddPointsIfDrifting();
+        }
+        
 
 
         //CAR PHYSICS
@@ -458,6 +482,8 @@ public class PrometeoCarController : MonoBehaviour
                 float roundedPoints = Mathf.RoundToInt(driftPoints);
                 driftPointsText.text = Mathf.RoundToInt(roundedPoints).ToString();
                 // Округляем driftPoints до целого числа.
+                float savedPointsUI = Mathf.RoundToInt(savedPoints);
+                savedScore.text = Mathf.RoundToInt(savedPointsUI).ToString();
                 
             }
             catch (Exception ex)
@@ -995,6 +1021,7 @@ public class PrometeoCarController : MonoBehaviour
             Debug.Log("Drift points: " + roundedPoints);
             // Выводим количество очков в консоль.
         }
+        
 
     }
     // Метод для сброса очков.
@@ -1002,5 +1029,24 @@ public class PrometeoCarController : MonoBehaviour
     {
         driftPoints = 0f;
         Debug.Log("Drift points reset to 0");
+    }
+    IEnumerator SavePointsAfterDelay()
+    {
+        yield return new WaitForSeconds(timeWithoutDrift);
+
+        savedPoints += Mathf.RoundToInt(driftPoints);
+        driftPoints = 0f;
+        Debug.Log("Saved points: " + savedPoints);
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        // Проверка столкновения с объектом.
+        // Например, если объект имеет тег "Obstacle":
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            // Обнуление roundedPoints при столкновении.
+            driftPoints = 0;
+            Debug.Log("Rounded points reset due to collision.");
+        }
     }
 }

@@ -58,6 +58,7 @@ public class PrometeoEditor : Editor{
   private SerializedProperty useUI;
   private SerializedProperty carSpeedText;
     private SerializedProperty driftPointsText;
+    private SerializedProperty savedScore;
   //
   //
   //SPEED TEXT (UI) VARIABLES
@@ -113,6 +114,7 @@ public class PrometeoEditor : Editor{
     useUI = SO.FindProperty("useUI");
     carSpeedText = SO.FindProperty("carSpeedText");
         driftPointsText = SO.FindProperty("driftPointsText");
+        savedScore = SO.FindProperty("savedScore");
 
     useSounds = SO.FindProperty("useSounds");
     carEngineSound = SO.FindProperty("carEngineSound");
@@ -212,6 +214,7 @@ public class PrometeoEditor : Editor{
 
         EditorGUILayout.PropertyField(carSpeedText, new GUIContent("Speed Text (UI): "));
         EditorGUILayout.PropertyField(driftPointsText, new GUIContent("Drift Points (UI): "));
+        EditorGUILayout.PropertyField(savedScore, new GUIContent("Score (UI): "));
 
     EditorGUILayout.EndToggleGroup();
 
