@@ -7,9 +7,9 @@ public class CarSelector1 : MonoBehaviour
     [SerializeField] private Button nextButton;
     private int currentCar;
 
-    private void Awake()
+    private void Start()
     {
-        SelectCar(0);
+        SelectCar(currentCar);
     }
 
     private void SelectCar(int _index)

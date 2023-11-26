@@ -179,6 +179,7 @@ public class PrometeoCarController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LoadSavedPoints();
         //In this part, we set the 'carRigidbody' value with the Rigidbody attached to this
         //gameObject. Also, we define the center of mass of the car with the Vector3 given
         //in the inspector.
@@ -1021,14 +1022,6 @@ public class PrometeoCarController : MonoBehaviour
             Debug.Log("Drift points: " + roundedPoints);
             // Выводим количество очков в консоль.
         }
-        
-
-    }
-    // Метод для сброса очков.
-    void ResetPoints()
-    {
-        driftPoints = 0f;
-        Debug.Log("Drift points reset to 0");
     }
     IEnumerator SavePointsAfterDelay()
     {
@@ -1037,6 +1030,7 @@ public class PrometeoCarController : MonoBehaviour
         savedPoints += Mathf.RoundToInt(driftPoints);
         driftPoints = 0f;
         Debug.Log("Saved points: " + savedPoints);
+        SavePoints();
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -1049,4 +1043,14 @@ public class PrometeoCarController : MonoBehaviour
             Debug.Log("Rounded points reset due to collision.");
         }
     }
+    void SavePoints()
+    {
+        PlayerPrefs.SetInt("SavedPoints", savedPoints);
+        PlayerPrefs.Save();
+    }
+    void LoadSavedPoints()
+    {
+        savedPoints = PlayerPrefs.GetInt("SavedPoints", 0);
+    }
+
 }
