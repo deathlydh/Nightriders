@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class CoinText : MonoBehaviour
 {
     Text CoinTexts;
-    private int currentCoins = 0; // переменная для хранения текущего количества монет
+    public int currentCoins = 0; // переменная для хранения текущего количества монет
 
     [SerializeField] private Button FirstButtonReward;
 
@@ -31,7 +31,7 @@ public class CoinText : MonoBehaviour
         }
     }
 
-    private void AddMoney(int coins)
+    public void AddMoney(int coins)
     {
         currentCoins += coins; // увеличиваем текущее количество монет на значение coins
         PlayerPrefs.SetInt("SavedPoints", currentCoins); // Сохраняем значение монет в PlayerPrefs
