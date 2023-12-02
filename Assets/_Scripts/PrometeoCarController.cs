@@ -229,11 +229,13 @@ public class PrometeoCarController : MonoBehaviour
         // in 0 seconds, and repeatedly called every 0.1 seconds.
         if (useUI)
         {
+            
             InvokeRepeating("CarSpeedUI", 0f, 0.1f);
             InvokeRepeating("DriftPointsUI", 0f, 0.1f);
         }
         else if (!useUI)
         {
+            
             if (carSpeedText != null)
             {
                 carSpeedText.text = "0";

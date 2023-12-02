@@ -22686,6 +22686,9 @@ MonoBehaviour:
   AllCar:
   - {fileID: 1987938158}
   - {fileID: 1661285743}
+  carSpeedText: {fileID: 1226788762}
+  driftPointsText: {fileID: 943026274}
+  savedScore: {fileID: 385089101}
 --- !u!4 &619139043
 Transform:
   m_ObjectHideFlags: 0
@@ -63585,6 +63588,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: bmvZ
       objectReference: {fileID: 0}
+    - target: {fileID: 7081088330036455696, guid: c6ab27d70bb33514a9d48d4a1ab61b9a, type: 3}
+      propertyPath: roadLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983011163768411755, guid: c6ab27d70bb33514a9d48d4a1ab61b9a, type: 3}
+      propertyPath: useUI
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983011163768411755, guid: c6ab27d70bb33514a9d48d4a1ab61b9a, type: 3}
+      propertyPath: useSounds
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8983011163768411755, guid: c6ab27d70bb33514a9d48d4a1ab61b9a, type: 3}
+      propertyPath: savedScore
+      value: 
+      objectReference: {fileID: 385089101}
+    - target: {fileID: 8983011163768411755, guid: c6ab27d70bb33514a9d48d4a1ab61b9a, type: 3}
+      propertyPath: carSpeedText
+      value: 
+      objectReference: {fileID: 1226788762}
+    - target: {fileID: 8983011163768411755, guid: c6ab27d70bb33514a9d48d4a1ab61b9a, type: 3}
+      propertyPath: driftPointsText
+      value: 
+      objectReference: {fileID: 943026274}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -65694,6 +65721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f6d3ff905719c845a4a6404bc4d4162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  choiceCarScript: {fileID: 619139042}
   carTransform: {fileID: 1150257892}
   followSpeed: 2
   lookSpeed: 5
