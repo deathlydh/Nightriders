@@ -11,6 +11,7 @@ something useful for your game. Best regards, Mena.
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -1053,6 +1054,18 @@ public class PrometeoCarController : MonoBehaviour
     void LoadSavedPoints()
     {
         savedPoints = PlayerPrefs.GetInt("SavedPoints", 0);
+    }
+    public float GetSavedPoints()
+    {
+        return savedPoints;
+    }
+    public float GetCarSpeed()
+    {
+        return carSpeed;
+    }
+    public float GetDriftPoints()
+    {
+        return driftPoints;
     }
 
 }

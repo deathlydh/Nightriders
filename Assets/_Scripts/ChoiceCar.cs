@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +9,12 @@ public class ChoiceCar : MonoBehaviour
     public Text driftPointsText; // Ссылка на текстовый элемент для очков дрифта
     public Text savedScore; // Ссылка на текстовый элемент для сохраненных очков
 
+
+    private PrometeoCarController carController;
+
     private void Start()
     {
+        
         for (int i = 0; i < AllCar.Length; i++)
         {
             AllCar[i].SetActive(false);
@@ -20,18 +23,29 @@ public class ChoiceCar : MonoBehaviour
         int currentCarIndex = PlayerPrefs.GetInt("CurrentCar", 0);
         AllCar[currentCarIndex].SetActive(true);
 
-        UpdateUI();
+        StartCoroutine(DelayedUpdateUI());
     }
 
+   /* private void Update()
+    {
+        UpdateUI();
+   } */
+    private IEnumerator DelayedUpdateUI()
+    {
+        yield return new WaitForSeconds(1f); // Подождем 1 секунду перед вызовом UpdateUI()
+
+        UpdateUI();
+    }
     private void UpdateUI()
     {
-        if (carSpeedText != null && driftPointsText != null && savedScore != null)
-        {
-            float carSpeed = 0f; // Получите текущую скорость вашей машины
-            float driftPoints = 0f; // Получите текущие очки дрифта
-            float savedPoints = 0f; // Получите текущие сохраненные очки
 
-            // Обновляем тексты элементов UI
+
+        if (carSpeedText != null && driftPointsText != null && savedScore != null && carController != null)
+        {
+            float carSpeed = carController.GetCarSpeed();
+            float driftPoints = carController.GetDriftPoints();
+            float savedPoints = carController.GetSavedPoints();
+
             float absoluteCarSpeed = Mathf.Abs(carSpeed);
             carSpeedText.text = Mathf.RoundToInt(absoluteCarSpeed).ToString();
 
@@ -41,5 +55,7 @@ public class ChoiceCar : MonoBehaviour
             float savedPointsUI = Mathf.RoundToInt(savedPoints);
             savedScore.text = Mathf.RoundToInt(savedPointsUI).ToString();
         }
+       
     }
+
 }

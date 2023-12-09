@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 #if YG_TEXT_MESH_PRO
 using TMPro;
 #endif
@@ -37,6 +37,8 @@ namespace YG
 
         private void DoAssignAdditionalText()
         {
+            langYG.AssignTranslate();
+
             if (side == Side.Left)
             {
                 if (langYG.textLComponent)

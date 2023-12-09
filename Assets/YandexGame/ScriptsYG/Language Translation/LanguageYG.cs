@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using YG.Utils.Lang;
@@ -78,8 +78,8 @@ namespace YG
 
         private void OnEnable()
         {
+            SwitchLanguage();
             YandexGame.SwitchLangEvent += SwitchLanguage;
-            SwitchLanguage(YandexGame.savesData.language);
         }
 
         private void OnDisable() => YandexGame.SwitchLangEvent -= SwitchLanguage;
@@ -107,8 +107,15 @@ namespace YG
 
                     if (additionalText != null)
                         additionalText.AssignAdditionalText(this);
+
                 }
             }
+        }
+
+        public void SwitchLanguage()
+        {
+            if (YandexGame.LangEnable())
+                SwitchLanguage(YandexGame.lang);
         }
 
         void AssignTranslate(string translation)
@@ -119,6 +126,18 @@ namespace YG
             else if (textMPComponent)
                 textMPComponent.text = translation;
 #endif
+        }
+
+        public void AssignTranslate()
+        {
+            for (int i = 0; i < languages.Length; i++)
+            {
+                if (YandexGame.savesData.language == LangMethods.LangName(i)) // YandexGame.savesData.language заменить для 2.0
+                {
+                    AssignTranslate(languages[i]);
+                    break;
+                }
+            }
         }
 
         public void ChangeFont(Font[] fontArray)
@@ -195,8 +214,7 @@ namespace YG
             else if (textMPComponent)
                 textMPComponent.fontSize = baseFontSize;
 #endif
-
-            if (fontSizeArray.Length != 0 && fontSizeArray.Length >= fontNumber - 1)
+            if (fontSizeArray.Length != 0 && fontSizeArray.Length -1 >= fontNumber)
             {
                 if (textLComponent)
                     textLComponent.fontSize += fontSizeArray[fontNumber];

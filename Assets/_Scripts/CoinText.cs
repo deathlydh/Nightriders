@@ -1,6 +1,7 @@
 using UnityEngine;
 using YG;
 using UnityEngine.UI;
+using System;
 
 public class CoinText : MonoBehaviour
 {
@@ -16,11 +17,22 @@ public class CoinText : MonoBehaviour
         UpdateCoins(currentCoins); // Обновляем текст с количеством монет
         YandexGame.FullscreenShow();
         FirstButtonReward.onClick.AddListener(delegate { ExampleOpenRewardAd(1); });
+
+        if(YandexGame.SDKEnabled == true)
+        {
+            LoadSaveCloud();
+        }
+    }
+
+    private void LoadSaveCloud()
+    {
+        CoinTexts.text = YandexGame.savesData.coins.ToString();
     }
 
     public void UpdateCoins(int coins)
     {
         CoinTexts.text = coins.ToString();
+        MySave();
     }
 
     void Rewarded(int id)
@@ -46,10 +58,21 @@ public class CoinText : MonoBehaviour
     private void OnEnable()
     {
         YandexGame.RewardVideoEvent += Rewarded;
+        YandexGame.GetDataEvent += LoadSaveCloud;
+        
     }
 
     private void OnDisable()
     {
         YandexGame.RewardVideoEvent -= Rewarded;
+        YandexGame.GetDataEvent -= LoadSaveCloud;
+        
     }
+    public void MySave()
+    {
+        YandexGame.savesData.coins = currentCoins;
+        YandexGame.SaveProgress();
+    }
+
+
 }
