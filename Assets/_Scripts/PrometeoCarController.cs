@@ -102,6 +102,14 @@ public class PrometeoCarController : MonoBehaviour
     public Text carSpeedText; // Used to store the UI object that is going to show the speed of the car.
     public Text driftPointsText;
     public Text savedScore;
+    private float lastCarSpeed = 0f;
+    private float lastDriftPoints = 0f;
+    private float lastSavedPoints = 0f;
+    public delegate void UIUpdateAction();
+    public static event UIUpdateAction OnCarSpeedChange;
+    public static event UIUpdateAction OnDriftPointsChange;
+    public static event UIUpdateAction OnSavedPointsChange;
+
 
     //SOUNDS
 
@@ -162,6 +170,7 @@ public class PrometeoCarController : MonoBehaviour
     float timeWithoutDrift = 5.0f;
     private int savedPoints = 0;
     private Coroutine pointsCoroutine;
+    
 
     /*
     The following variables are used to store information about sideways friction of the wheels (such as
@@ -181,6 +190,7 @@ public class PrometeoCarController : MonoBehaviour
     void Start()
     {
         LoadSavedPoints();
+       
         //In this part, we set the 'carRigidbody' value with the Rigidbody attached to this
         //gameObject. Also, we define the center of mass of the car with the Vector3 given
         //in the inspector.
@@ -230,25 +240,13 @@ public class PrometeoCarController : MonoBehaviour
         // in 0 seconds, and repeatedly called every 0.1 seconds.
         if (useUI)
         {
-            
-            InvokeRepeating("CarSpeedUI", 0f, 0.1f);
-            InvokeRepeating("DriftPointsUI", 0f, 0.1f);
+            StartCoroutine(UpdateUIRoutine());
+
         }
-        else if (!useUI)
+        else
         {
-            
-            if (carSpeedText != null)
-            {
-                carSpeedText.text = "0";
-            }
-            if (driftPointsText != null)
-            {
-                driftPointsText.text = "0";
-            }
-            if (savedScore != null)
-            {
-                savedScore.text = "0";
-            }
+
+            ResetUIText();
         }
 
         if (useSounds)
@@ -319,7 +317,7 @@ public class PrometeoCarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
         //CAR DATA
 
         // We determine the speed of the car.
@@ -345,8 +343,12 @@ public class PrometeoCarController : MonoBehaviour
 
             AddPointsIfDrifting();
         }
-        
 
+        if (useUI)
+        {
+            CarSpeedUI();
+           
+        }
 
         //CAR PHYSICS
 
@@ -473,6 +475,7 @@ public class PrometeoCarController : MonoBehaviour
 
     }
 
+   
     // This method converts the car speed data from float to string, and then set the text of the UI carSpeedText with this value.
     public void CarSpeedUI()
     {
@@ -1067,5 +1070,40 @@ public class PrometeoCarController : MonoBehaviour
     {
         return driftPoints;
     }
+
+    public float uiUpdateInterval = 1000000000f;
+    IEnumerator UpdateUIRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(uiUpdateInterval);
+
+            if (Mathf.Abs(carSpeed - lastCarSpeed) > 0.5f)
+            {
+                lastCarSpeed = carSpeed;
+                OnCarSpeedChange?.Invoke();
+            }
+
+            if (Mathf.Abs(driftPoints - lastDriftPoints) > 0.5f)
+            {
+                lastDriftPoints = driftPoints;
+                OnDriftPointsChange?.Invoke();
+            }
+
+            if (Mathf.Abs(savedPoints - lastSavedPoints) > 0.5f)
+            {
+                lastSavedPoints = savedPoints;
+                OnSavedPointsChange?.Invoke();
+            }
+        }
+    }
+
+    void ResetUIText()
+    {
+        if (carSpeedText != null) carSpeedText.text = "0";
+        if (driftPointsText != null) driftPointsText.text = "0";
+        if (savedScore != null) savedScore.text = "0";
+    }
+
 
 }
