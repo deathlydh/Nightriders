@@ -7,6 +7,7 @@
 //
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -62,7 +63,10 @@ public class Outline : MonoBehaviour {
   [SerializeField, Range(0f, 10f)]
   private float outlineWidth = 2f;
 
-  [Header("Optional")]
+    [SerializeField]
+    private List<GameObject> objectsToIgnore = new List<GameObject>();
+
+    [Header("Optional")]
 
   [SerializeField, Tooltip("Precompute enabled: Per-vertex calculations are performed in the editor and serialized with the object. "
   + "Precompute disabled: Per-vertex calculations are performed at runtime in Awake(). This may cause a pause for large meshes.")]

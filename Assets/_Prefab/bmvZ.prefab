@@ -820,6 +820,7 @@ MonoBehaviour:
   isDrifting: 0
   isTractionLocked: 0
   driftPoints: 0
+  uiUpdateInterval: 1e+9
 --- !u!114 &7081088330036455696
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,6 +28,12 @@ public class ShopButton : MonoBehaviour
         manager = shopManager;
     }
 
+    public void SetCarIndex(int newIndex)
+    {
+        CarIndex = newIndex;
+        UpdateInfo();
+    }
+
     public void UpdateInfo()
     {
         int currentCarIndex = PlayerPrefs.GetInt("CurrentCar", 0);
@@ -63,7 +69,13 @@ public class ShopButton : MonoBehaviour
                     // Установка машины как выбранной, если только что куплена
                     PlayerPrefs.SetInt("CurrentCar", CarIndex);
 
-                    manager.UpdateInfoButton();
+                    // Обновляем информацию о кнопке
+                    UpdateInfo();
+
+                    if (manager != null)
+                    {
+                        manager.UpdateInfoButton();
+                    }
                 }
                 else
                 {
@@ -74,7 +86,12 @@ public class ShopButton : MonoBehaviour
             {
                 Debug.Log("Машина уже куплена, назначить основной");
                 PlayerPrefs.SetInt("CurrentCar", CarIndex);
-                manager.UpdateInfoButton();
+                UpdateInfo();
+
+                if (manager != null)
+                {
+                    manager.UpdateInfoButton();
+                }
             }
         }
         else
