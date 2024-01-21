@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 using YG;
 
 public class TimerBeforeAdsYG : MonoBehaviour
@@ -23,11 +21,9 @@ public class TimerBeforeAdsYG : MonoBehaviour
     private UnityEvent onShowTimer; 
     [SerializeField]
     private UnityEvent onHideTimer;
-    [SerializeField] private Button continueButton;
 
     private void Start()
     {
-        continueButton.onClick.AddListener(ContinueGame);
         if (secondsPanelObject)
             secondsPanelObject.SetActive(false);
 
@@ -40,12 +36,6 @@ public class TimerBeforeAdsYG : MonoBehaviour
             Debug.LogError("Fill in the array 'secondObjects'");
     }
 
-    private void ContinueGame()
-    {
-        Time.timeScale = 1;
-        continueButton.gameObject.SetActive(false);
-    }
-
     IEnumerator CheckTimerAd()
     {
         bool checking = true;
@@ -53,7 +43,6 @@ public class TimerBeforeAdsYG : MonoBehaviour
         {
             if (YandexGame.timerShowAd >= YandexGame.Instance.infoYG.fullscreenAdInterval)
             {
-                Time.timeScale = 0;
                 onShowTimer?.Invoke();
                 objSecCounter = 0;
                 if (secondsPanelObject)
@@ -93,7 +82,6 @@ public class TimerBeforeAdsYG : MonoBehaviour
             if (objSecCounter == secondObjects.Length)
             {
                 YandexGame.FullscreenShow();
-                continueButton.gameObject.SetActive(true);
                 StartCoroutine(BackupTimerClosure());
 
                 while (!YandexGame.nowFullAd)
