@@ -11,6 +11,8 @@ public class CarSelector1 : MonoBehaviour
 
     private void Start()
     {
+        int savedCarIndex = PlayerPrefs.GetInt("CurrentCar", 0);
+        currentCar = savedCarIndex;
         SelectCar(currentCar);
     }
 
@@ -32,11 +34,23 @@ public class CarSelector1 : MonoBehaviour
                 shopButtons[i].gameObject.SetActive(i == _index);
             }
         }
+
+        // Обновляем состояние всех кнопок магазина
+        UpdateShopButton();
     }
 
     public void ChangeCar(int _change)
     {
         currentCar += _change;
         SelectCar(currentCar);
+    }
+
+    private void UpdateShopButton()
+    {
+        // Обновляем состояние всех кнопок магазина
+        foreach (var shopButton in shopButtons)
+        {
+            shopButton.UpdateInfo();
+        }
     }
 }

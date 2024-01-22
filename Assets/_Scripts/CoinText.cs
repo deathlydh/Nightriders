@@ -5,34 +5,52 @@ using System;
 
 public class CoinText : MonoBehaviour
 {
-    Text CoinTexts;
+    Text coinTexts;
     public int currentCoins = 0; // переменная для хранения текущего количества монет
 
     [SerializeField] private Button FirstButtonReward;
 
     void Start()
     {
-        CoinTexts = GetComponent<Text>();
-        currentCoins = PlayerPrefs.GetInt("SavedPoints", 0); // Получаем сохраненное количество монет
-        UpdateCoins(currentCoins); // Обновляем текст с количеством монет
+
+        coinTexts = GetComponentInChildren<Text>();
+
+   
+        currentCoins = PlayerPrefs.GetInt("SavedPoints", 0);
+        UpdateCoins(currentCoins);
         YandexGame.FullscreenShow();
         FirstButtonReward.onClick.AddListener(delegate { ExampleOpenRewardAd(1); });
+        
 
-        if(YandexGame.SDKEnabled == true)
+        if (YandexGame.SDKEnabled == true)
         {
-            LoadSaveCloud();
+         //   LoadSaveCloud();
         }
     }
 
-    private void LoadSaveCloud()
-    {
-        CoinTexts.text = YandexGame.savesData.coins.ToString();
-    }
+    //public void LoadSaveCloud()
+    //{
+      //  if (coinTexts != null)
+     //   {
+     //       coinTexts.text = YandexGame.savesData.coins.ToString();
+      //  }
+     //   else
+      //  {
+       //     Debug.LogError("CoinTexts is null. Unable to update text.");
+      //  }
+   // }
 
     public void UpdateCoins(int coins)
     {
-        CoinTexts.text = coins.ToString();
-        MySave();
+        if (coinTexts != null)
+        {
+            coinTexts.text = coins.ToString();
+            MySave();
+        }
+        else
+        {
+            Debug.LogError("CoinTexts is null. Unable to update text.");
+        }
     }
 
     void Rewarded(int id)
@@ -58,21 +76,22 @@ public class CoinText : MonoBehaviour
     private void OnEnable()
     {
         YandexGame.RewardVideoEvent += Rewarded;
-        YandexGame.GetDataEvent += LoadSaveCloud;
-        
+      //  YandexGame.GetDataEvent += LoadSaveCloud;
+
     }
 
     private void OnDisable()
     {
         YandexGame.RewardVideoEvent -= Rewarded;
-        YandexGame.GetDataEvent -= LoadSaveCloud;
-        
+      //  YandexGame.GetDataEvent -= LoadSaveCloud;
+
     }
     public void MySave()
     {
         YandexGame.savesData.coins = currentCoins;
         YandexGame.SaveProgress();
     }
+    
 
 
 }

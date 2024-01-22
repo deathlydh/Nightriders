@@ -50,6 +50,8 @@ public class ShopButton : MonoBehaviour
         {
             statusText.text = "Стоимость: " + carPrice + " монет";
         }
+
+  
     }
 
     public void BuyCar()
