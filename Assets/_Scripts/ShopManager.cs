@@ -25,8 +25,15 @@ public class ShopManager : MonoBehaviour
             AllButton[i].UpdateInfo();
         }
 
-        int coinsAmount = coinText.currentCoins; // Получение текущего количества монет из CoinText
-        coinText.UpdateCoins(coinsAmount); // Передача текущего количества монет в метод UpdateCoins() класса CoinText
+        if (coinText != null)
+        {
+            int coinsAmount = coinText.currentCoins;
+            coinText.UpdateCoins(coinsAmount);
+        }
+        else
+        {
+            Debug.LogError("CoinText в ShopManager не был назначен или отсутствует.");
+        }
     }
 }
 

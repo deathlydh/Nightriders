@@ -1,59 +1,59 @@
 using UnityEngine;
 using YG;
 using UnityEngine.UI;
-using System;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class CoinText : MonoBehaviour
 {
-    Text coinTexts;
-    public int currentCoins = 0; // переменная для хранения текущего количества монет
+    public Text coinText;  // <-- Добавлено новое публичное поле
 
+    public int currentCoins = 0;
     [SerializeField] private Button FirstButtonReward;
 
-    void Start()
+    private void Start()
     {
+        if (coinText == null)
+        {
+            Debug.LogError("CoinText: Text component not assigned in the inspector!");
+            return;
+        }
 
-        coinTexts = GetComponentInChildren<Text>();
-
-   
         currentCoins = PlayerPrefs.GetInt("SavedPoints", 0);
         UpdateCoins(currentCoins);
         YandexGame.FullscreenShow();
         FirstButtonReward.onClick.AddListener(delegate { ExampleOpenRewardAd(1); });
-        
 
-        if (YandexGame.SDKEnabled == true)
+        if (YandexGame.SDKEnabled)
         {
-         //   LoadSaveCloud();
+            LoadSaveCloud();
+        }
+    }
+    public void LoadSaveCloud()
+    {
+        if (coinText != null)
+        {
+            coinText.text = YandexGame.savesData.coins.ToString(); 
+        }
+        else
+        {
+            Debug.LogError("CoinText component not found in the same GameObject or its children!");
         }
     }
 
-    //public void LoadSaveCloud()
-    //{
-      //  if (coinTexts != null)
-     //   {
-     //       coinTexts.text = YandexGame.savesData.coins.ToString();
-      //  }
-     //   else
-      //  {
-       //     Debug.LogError("CoinTexts is null. Unable to update text.");
-      //  }
-   // }
-
     public void UpdateCoins(int coins)
     {
-        if (coinTexts != null)
+        if (coinText != null)
         {
-            coinTexts.text = coins.ToString();
+            coinText.text = coins.ToString();
             MySave();
         }
         else
         {
-            Debug.LogError("CoinTexts is null. Unable to update text.");
+            Debug.LogError("CoinText component not found in the same GameObject or its children!");
         }
     }
 
-    void Rewarded(int id)
+    private void Rewarded(int id)
     {
         if (id == 1)
         {
@@ -63,12 +63,12 @@ public class CoinText : MonoBehaviour
 
     public void AddMoney(int coins)
     {
-        currentCoins += coins; // увеличиваем текущее количество монет на значение coins
-        PlayerPrefs.SetInt("SavedPoints", currentCoins); // Сохраняем значение монет в PlayerPrefs
-        UpdateCoins(currentCoins); // Обновляем текст с количеством монет
+        currentCoins += coins;
+        PlayerPrefs.SetInt("SavedPoints", currentCoins);
+        UpdateCoins(currentCoins);
     }
 
-    void ExampleOpenRewardAd(int id)
+    private void ExampleOpenRewardAd(int id)
     {
         YandexGame.RewVideoShow(id);
     }
@@ -76,22 +76,25 @@ public class CoinText : MonoBehaviour
     private void OnEnable()
     {
         YandexGame.RewardVideoEvent += Rewarded;
-      //  YandexGame.GetDataEvent += LoadSaveCloud;
-
+        YandexGame.GetDataEvent += LoadSaveCloud;
     }
 
     private void OnDisable()
     {
         YandexGame.RewardVideoEvent -= Rewarded;
-      //  YandexGame.GetDataEvent -= LoadSaveCloud;
-
+        YandexGame.GetDataEvent -= LoadSaveCloud;
     }
-    public void MySave()
+
+    private void MySave()
     {
-        YandexGame.savesData.coins = currentCoins;
-        YandexGame.SaveProgress();
+        if (YandexGame.savesData != null)
+        {
+            YandexGame.savesData.coins = currentCoins;
+            YandexGame.SaveProgress();
+        }
+        else
+        {
+            Debug.LogError("YandexGame.savesData is null. Unable to save progress.");
+        }
     }
-    
-
-
 }

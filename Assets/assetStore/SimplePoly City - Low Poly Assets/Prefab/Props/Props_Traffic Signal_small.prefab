@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 5955533620908639417}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Props_Traffic Signal_small
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 5330458209569662610}
   - component: {fileID: 5392618908184332676}
   - component: {fileID: 6496142811374866648}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Traffic_car 1
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,6 +124,7 @@ MonoBehaviour:
   - {fileID: 1646981259178978, guid: 512151c1530b99343a884b12ee9c5e1e, type: 3}
   - {fileID: 1646981259178978, guid: ab26596a331d7ee43a3e9d29e2be9f84, type: 3}
   - {fileID: 1646981259178978, guid: 50477af197889084e8a6d97f2b73b73b, type: 3}
+  carToSpawn: 0
 --- !u!114 &5392618908184332676
 MonoBehaviour:
   m_ObjectHideFlags: 0

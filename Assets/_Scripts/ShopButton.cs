@@ -19,6 +19,12 @@ public class ShopButton : MonoBehaviour
         // Получение ссылки на скрипт CoinText
         coinText = FindObjectOfType<CoinText>();
 
+        if (coinText == null)
+        {
+            Debug.LogError("CoinText script not found in the scene!");
+            return;
+        }
+
         PlayerPrefs.SetInt("CarBought_" + 0, 1);
         UpdateInfo();
     }

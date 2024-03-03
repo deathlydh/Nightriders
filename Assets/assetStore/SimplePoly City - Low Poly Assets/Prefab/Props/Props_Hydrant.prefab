@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2300000}
   - component: {fileID: 3899021491360714009}
   - component: {fileID: 2720512591254262121}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Props_Hydrant
   m_TagString: Untagged
   m_Icon: {fileID: 0}

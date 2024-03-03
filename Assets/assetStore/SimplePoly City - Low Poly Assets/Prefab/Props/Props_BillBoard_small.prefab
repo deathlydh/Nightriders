@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 2921390407628888251}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Props_BillBoard_small
   m_TagString: Untagged
   m_Icon: {fileID: 0}

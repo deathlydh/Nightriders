@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2300000}
   - component: {fileID: 9500000}
   - component: {fileID: 897829394506412044}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Props_Roof Helipad
   m_TagString: Untagged
   m_Icon: {fileID: 0}

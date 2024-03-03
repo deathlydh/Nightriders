@@ -1,0 +1,11 @@
+Model Information:
+* title:	Low poly Nissan Skyline GT-R VIII (R32)
+* source:	https://sketchfab.com/3d-models/low-poly-nissan-skyline-gt-r-viii-r32-f7865db326074f28a9f08e2b0a8b6540
+* author:	W1ZZERZ (https://sketchfab.com/W1ZZERZ)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Low poly Nissan Skyline GT-R VIII (R32)" (https://sketchfab.com/3d-models/low-poly-nissan-skyline-gt-r-viii-r32-f7865db326074f28a9f08e2b0a8b6540) by W1ZZERZ (https://sketchfab.com/W1ZZERZ) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

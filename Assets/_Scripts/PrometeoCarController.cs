@@ -102,13 +102,17 @@ public class PrometeoCarController : MonoBehaviour
     public Text carSpeedText; // Used to store the UI object that is going to show the speed of the car.
     public Text driftPointsText;
     public Text savedScore;
+    public Text crashPointsText;
     private float lastCarSpeed = 0f;
+    private float lastCrashPoints = 0f;
     private float lastDriftPoints = 0f;
     private float lastSavedPoints = 0f;
     public delegate void UIUpdateAction();
     public static event UIUpdateAction OnCarSpeedChange;
     public static event UIUpdateAction OnDriftPointsChange;
     public static event UIUpdateAction OnSavedPointsChange;
+    public static event UIUpdateAction OnCrashPointsChange;
+    public bool enableDriftPoints = false; // Переменная для включения/отключения начисления очков за дрифт
 
 
     //SOUNDS
@@ -151,6 +155,8 @@ public class PrometeoCarController : MonoBehaviour
     public bool isTractionLocked; // Used to know whether the traction of the car is locked or not.
     [HideInInspector]
     public float driftPoints = 0f;
+    [HideInInspector]
+    public float crashPoints = 0f;
 
     //PRIVATE VARIABLES
 
@@ -167,10 +173,11 @@ public class PrometeoCarController : MonoBehaviour
     bool touchControlsSetup = false;
     bool isBoosting = false;
     bool isShiftPressed = false;
-    float timeWithoutDrift = 5.0f;
+    float timeWithoutDrift = 3.0f;
     private int savedPoints = 0;
     private Coroutine pointsCoroutine;
     
+
 
     /*
     The following variables are used to store information about sideways friction of the wheels (such as
@@ -491,7 +498,8 @@ public class PrometeoCarController : MonoBehaviour
                 // Округляем driftPoints до целого числа.
                 float savedPointsUI = Mathf.RoundToInt(savedPoints);
                 savedScore.text = Mathf.RoundToInt(savedPointsUI).ToString();
-                
+                crashPointsText.text = Mathf.RoundToInt(crashPoints).ToString();
+
             }
             catch (Exception ex)
             {
@@ -1016,7 +1024,7 @@ public class PrometeoCarController : MonoBehaviour
 
     public void AddPointsIfDrifting()
     {
-        if (isDrifting)
+        if (isDrifting && enableDriftPoints) // Добавляем проверку enableDriftPoints.
         {
             // Начисляем очки за дрифт (может быть любая логика).
             driftPoints += 0.1f; // Например, каждый раз начисляем 10 очков.
@@ -1038,6 +1046,14 @@ public class PrometeoCarController : MonoBehaviour
         Debug.Log("Saved points: " + savedPoints);
         SavePoints();
     }
+    public void AddCrashPoints(float points)
+    {
+        crashPoints += points;
+        // Сразу же сохраняем crashPoints при столкновении
+        savedPoints += Mathf.RoundToInt(crashPoints);
+        crashPoints = 0f; // Обнуляем crashPoints после сохранения.
+        SavePoints(); // Сохраняем обновленное значение savedPoints
+    }
     void OnCollisionEnter(Collision collision)
     {
         // Проверка столкновения с объектом.
@@ -1048,6 +1064,7 @@ public class PrometeoCarController : MonoBehaviour
             driftPoints = 0;
             Debug.Log("Rounded points reset due to collision.");
         }
+        
     }
     void SavePoints()
     {
@@ -1095,6 +1112,12 @@ public class PrometeoCarController : MonoBehaviour
                 lastSavedPoints = savedPoints;
                 OnSavedPointsChange?.Invoke();
             }
+
+            if (Mathf.Abs(crashPoints - lastCrashPoints) > 0.5f)
+            {
+                lastCrashPoints = crashPoints;
+                OnCrashPointsChange?.Invoke();
+            }
         }
     }
 
@@ -1103,6 +1126,16 @@ public class PrometeoCarController : MonoBehaviour
         if (carSpeedText != null) carSpeedText.text = "0";
         if (driftPointsText != null) driftPointsText.text = "0";
         if (savedScore != null) savedScore.text = "0";
+        if (crashPointsText != null) crashPointsText.text = "0";
+
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Crash"))
+        {
+            AddCrashPoints(1000); // Добавляем одно очко при столкновении с объектом "Crash"
+        }
     }
 
 

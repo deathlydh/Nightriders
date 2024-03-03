@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2300000}
   - component: {fileID: 557198149367343078}
   - component: {fileID: 6780466933260206833}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Props_BillBoard_large
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

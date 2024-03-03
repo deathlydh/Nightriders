@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.AnimatedValues;
+using UnityEngine.SceneManagement;
 
 [CustomEditor(typeof(PrometeoCarController))]
 [System.Serializable]
@@ -26,6 +27,7 @@ public class PrometeoEditor : Editor{
   private SerializedProperty decelerationMultiplier;
   private SerializedProperty handbrakeDriftMultiplier;
   private SerializedProperty bodyMassCenter;
+  
   //
   //
   //WHEELS VARIABLES
@@ -50,15 +52,16 @@ public class PrometeoEditor : Editor{
   private SerializedProperty RLWTireSkid;
   private SerializedProperty RRWTireSkid;
     private SerializedProperty nitroParticleSystem;
-  //
-  //
-  //SPEED TEXT (UI) VARIABLES
-  //
-  //
-  private SerializedProperty useUI;
+    private SerializedProperty enableDriftPoints;
+    //
+    //SPEED TEXT (UI) VARIABLES
+    //
+    //
+    private SerializedProperty useUI;
   private SerializedProperty carSpeedText;
     private SerializedProperty driftPointsText;
     private SerializedProperty savedScore;
+    private SerializedProperty crashPointsText;
   //
   //
   //SPEED TEXT (UI) VARIABLES
@@ -83,8 +86,9 @@ public class PrometeoEditor : Editor{
   private void OnEnable(){
     prometeo = (PrometeoCarController)target;
     SO = new SerializedObject(target);
+        
 
-    maxSpeed = SO.FindProperty("maxSpeed");
+        maxSpeed = SO.FindProperty("maxSpeed");
     maxReverseSpeed = SO.FindProperty("maxReverseSpeed");
     accelerationMultiplier = SO.FindProperty("accelerationMultiplier");
         boost = SO.FindProperty("boost");
@@ -115,8 +119,10 @@ public class PrometeoEditor : Editor{
     carSpeedText = SO.FindProperty("carSpeedText");
         driftPointsText = SO.FindProperty("driftPointsText");
         savedScore = SO.FindProperty("savedScore");
+        enableDriftPoints = SO.FindProperty("enableDriftPoints");
+        crashPointsText = SO.FindProperty("crashPointsText");
 
-    useSounds = SO.FindProperty("useSounds");
+        useSounds = SO.FindProperty("useSounds");
     carEngineSound = SO.FindProperty("carEngineSound");
     tireScreechSound = SO.FindProperty("tireScreechSound");
         nitroBoostSound = SO.FindProperty("nitroBoostSound");
@@ -199,32 +205,43 @@ public class PrometeoEditor : Editor{
 
     EditorGUILayout.EndToggleGroup();
 
-    //
-    //
-    //UI
-    //
-    //
+        //
+        //
+        //UI
+        //
+        //
 
-    GUILayout.Space(25);
-    GUILayout.Label("UI", EditorStyles.boldLabel);
-    GUILayout.Space(10);
+       
+        GUILayout.Space(25);
+        GUILayout.Label("UI", EditorStyles.boldLabel);
+        GUILayout.Space(10);
 
-    useUI.boolValue = EditorGUILayout.BeginToggleGroup("Use UI (Speed text)?", useUI.boolValue);
-    GUILayout.Space(10);
+        EditorGUILayout.PropertyField(useUI, new GUIContent("Use UI (Speed text)?"));
 
-        EditorGUILayout.PropertyField(carSpeedText, new GUIContent("Speed Text (UI): "));
-        EditorGUILayout.PropertyField(driftPointsText, new GUIContent("Drift Points (UI): "));
-        EditorGUILayout.PropertyField(savedScore, new GUIContent("Score (UI): "));
+        if (useUI.boolValue)
+        {
+            EditorGUILayout.PropertyField(carSpeedText, new GUIContent("Speed Text (UI): "));
+            EditorGUILayout.PropertyField(savedScore, new GUIContent("Score (UI): "));
+            EditorGUILayout.PropertyField(crashPointsText, new GUIContent("Crash Points (UI): "));
 
-    EditorGUILayout.EndToggleGroup();
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.PrefixLabel("Enable Drift Points");
+            enableDriftPoints.boolValue = EditorGUILayout.Toggle(enableDriftPoints.boolValue);
+            EditorGUILayout.EndHorizontal();
 
-    //
-    //
-    //SOUNDS
-    //
-    //
+            if (enableDriftPoints.boolValue)
+            {
+                EditorGUILayout.PropertyField(driftPointsText, new GUIContent("Drift Points (UI): "));
+            }
+        }
 
-    GUILayout.Space(25);
+        //
+        //
+        //SOUNDS
+        //
+        //
+
+        GUILayout.Space(25);
     GUILayout.Label("SOUNDS", EditorStyles.boldLabel);
     GUILayout.Space(10);
 
@@ -258,11 +275,12 @@ public class PrometeoEditor : Editor{
 
     EditorGUILayout.EndToggleGroup();
 
-    //END
-
-    GUILayout.Space(10);
+       
+        GUILayout.Space(10);
     SO.ApplyModifiedProperties();
 
   }
+    
+
 
 }

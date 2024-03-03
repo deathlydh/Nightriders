@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8636097019691471727}
   m_Layer: 0
   m_Name: Natures_House Floor
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 2407708723128901777}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Props_Roof Antenna
   m_TagString: Untagged
   m_Icon: {fileID: 0}

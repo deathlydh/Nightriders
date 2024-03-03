@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 5894792231193092394}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Props_Traffic Sign_speed limit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
