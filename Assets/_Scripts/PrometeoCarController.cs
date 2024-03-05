@@ -491,8 +491,7 @@ public class PrometeoCarController : MonoBehaviour
         {
             try
             {
-                float absoluteCarSpeed = Mathf.Abs(carSpeed);
-                carSpeedText.text = Mathf.RoundToInt(absoluteCarSpeed).ToString();
+                
                 float roundedPoints = Mathf.RoundToInt(driftPoints);
                 driftPointsText.text = Mathf.RoundToInt(roundedPoints).ToString();
                 // Округляем driftPoints до целого числа.
