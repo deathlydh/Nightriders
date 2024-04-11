@@ -7,9 +7,12 @@ using YG;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayGame()
+    public void PlayGameFreeRide()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("SimplePoly City - Low Poly Assets_Demo Scene");
     }
-
+    public void PlayGameCrashTest()
+    {
+        SceneManager.LoadScene("crash-test");
+    }
 }

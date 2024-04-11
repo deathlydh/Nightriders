@@ -4,6 +4,7 @@ using UnityEngine;
 public class BoxSpawner : MonoBehaviour
 {
     public List<GameObject> boxes; // Список всех коробок на сцене
+   
 
     private void Start()
     {
@@ -12,7 +13,7 @@ public class BoxSpawner : MonoBehaviour
 
     public void ActivateRandomBoxes()
     {
-        int minBoxesToActivate = 10; // Минимальное количество коробок для активации
+        int minBoxesToActivate = 5; // Минимальное количество коробок для активации
         int numberOfBoxesToActivate = Random.Range(minBoxesToActivate, boxes.Count + 1); // Выбираем случайное количество коробок для активации
         for (int i = 0; i < numberOfBoxesToActivate; i++)
         {
@@ -24,5 +25,7 @@ public class BoxSpawner : MonoBehaviour
                 boxes.RemoveAt(randomIndex); // Удаляем активированную коробку из списка
             }
         }
+
+       
     }
 }

@@ -157,7 +157,10 @@ public class PrometeoCarController : MonoBehaviour
     public float driftPoints = 0f;
     [HideInInspector]
     public float crashPoints = 0f;
-
+    [HideInInspector]
+    private PauseMenu1 pauseMenu;
+    [HideInInspector]
+    private TimerBeforeAdsYG timerBeforeAds;
     //PRIVATE VARIABLES
 
     /*
@@ -197,7 +200,11 @@ public class PrometeoCarController : MonoBehaviour
     void Start()
     {
         LoadSavedPoints();
-       
+
+        timerBeforeAds = FindObjectOfType<TimerBeforeAdsYG>();
+        
+        pauseMenu = FindObjectOfType<PauseMenu1>(); // Находим объект PauseMenu в сцене
+        
         //In this part, we set the 'carRigidbody' value with the Rigidbody attached to this
         //gameObject. Also, we define the center of mass of the car with the Vector3 given
         //in the inspector.
@@ -1021,9 +1028,10 @@ public class PrometeoCarController : MonoBehaviour
         }
     }
 
+        // Ваш метод начисления очков за дрифт.
     public void AddPointsIfDrifting()
     {
-        if (isDrifting && enableDriftPoints) // Добавляем проверку enableDriftPoints.
+        if (!pauseMenu.isPaused && Time.timeScale != 0 && isDrifting && enableDriftPoints && !timerBeforeAds.showingAd)
         {
             // Начисляем очки за дрифт (может быть любая логика).
             driftPoints += 0.1f; // Например, каждый раз начисляем 10 очков.
@@ -1033,9 +1041,9 @@ public class PrometeoCarController : MonoBehaviour
 
             // Выводим количество очков в консоль.
             Debug.Log("Drift points: " + roundedPoints);
-            // Выводим количество очков в консоль.
         }
     }
+
     IEnumerator SavePointsAfterDelay()
     {
         yield return new WaitForSeconds(timeWithoutDrift);
@@ -1133,9 +1141,9 @@ public class PrometeoCarController : MonoBehaviour
     {
         if (other.CompareTag("Crash"))
         {
-            AddCrashPoints(1000); // Добавляем одно очко при столкновении с объектом "Crash"
+            AddCrashPoints(250); // Добавляем одно очко при столкновении с объектом "Crash"
         }
     }
-
+   
 
 }

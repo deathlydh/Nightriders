@@ -57,7 +57,7 @@ public class CoinText : MonoBehaviour
     {
         if (id == 1)
         {
-            AddMoney(1000);
+            AddMoney(2000);
         }
     }
 

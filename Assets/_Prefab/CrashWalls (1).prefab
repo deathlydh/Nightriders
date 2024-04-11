@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 8507639160019842323}
   - component: {fileID: 5801407366982262662}
   - component: {fileID: 2667464335967830768}
-  - component: {fileID: 4714388746706461609}
+  - component: {fileID: 2492156479066462129}
   m_Layer: 0
   m_Name: CardboardBoxes_1 (1)
   m_TagString: Untagged
@@ -403,7 +403,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4714388746706461609
+--- !u!114 &2492156479066462129
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -415,9 +415,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411060de4483b5e4c9847cd3cbc18554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetColor: {r: 0, g: 0.060248375, b: 1, a: 1}
+  targetColor: {r: 1, g: 0.7121692, b: 0.023584902, a: 1}
   needBoxIndicator: 1
-  needArrowIndicator: 0
+  needArrowIndicator: 1
   needDistanceText: 1
   indicator: {fileID: 0}
 --- !u!1 &4889373760627161409
@@ -699,6 +699,7 @@ GameObject:
   - component: {fileID: 6324300188480627732}
   - component: {fileID: 4698090639852706643}
   - component: {fileID: 7756297492339253851}
+  - component: {fileID: 8900998056845403666}
   m_Layer: 0
   m_Name: CrashWalls (1)
   m_TagString: Crash
@@ -760,3 +761,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyedBoxesText: {fileID: 0}
+--- !u!114 &8900998056845403666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8040253349213621611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e105b8ee1df4d418335bc7e657dbdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
