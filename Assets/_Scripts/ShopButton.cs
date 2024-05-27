@@ -1,22 +1,23 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class ShopButton : MonoBehaviour
 {
-    public int carPrice = 100; // Цена машинки
-    public Button buyButton; // Кнопка покупки
-    public Text statusText; // Текстовое поле для вывода статуса покупки
-    public GameObject cars; // Массив доступных машинок
+    public int carPrice = 100; // Р¦РµРЅР° РјР°С€РёРЅРєРё
+    public Button buyButton; // РљРЅРѕРїРєР° РїРѕРєСѓРїРєРё
+    public Text statusText; // РўРµРєСЃС‚РѕРІРѕРµ РїРѕР»Рµ РґР»СЏ РІС‹РІРѕРґР° СЃС‚Р°С‚СѓСЃР° РїРѕРєСѓРїРєРё
+    public GameObject cars; // РњР°СЃСЃРёРІ РґРѕСЃС‚СѓРїРЅС‹С… РјР°С€РёРЅРѕРє
     public int CarIndex = 0;
 
     private ShopManager manager;
-    private CoinText coinText; // Ссылка на скрипт CoinText
+    private CoinText coinText; // РЎСЃС‹Р»РєР° РЅР° СЃРєСЂРёРїС‚ CoinText
 
     private void Start()
     {
         buyButton.onClick.AddListener(BuyCar);
 
-        // Получение ссылки на скрипт CoinText
+        // РџРѕР»СѓС‡РµРЅРёРµ СЃСЃС‹Р»РєРё РЅР° СЃРєСЂРёРїС‚ CoinText
         coinText = FindObjectOfType<CoinText>();
 
         if (coinText == null)
@@ -46,38 +47,53 @@ public class ShopButton : MonoBehaviour
 
         if (currentCarIndex == CarIndex)
         {
-            statusText.text = "Выбрана";
+            statusText.text = GetLocalizedString("Р’С‹Р±СЂР°РЅРѕ", "Selected", "SeГ§ildi");
         }
         else if (PlayerPrefs.GetInt("CarBought_" + CarIndex, 0) == 1)
         {
-            statusText.text = "Куплена";
+            statusText.text = GetLocalizedString("РљСѓРїР»РµРЅРѕ", "Purchased", "SatД±n AlД±ndД±");
         }
         else
         {
-            statusText.text = "Стоимость: " + carPrice + " монет";
+            string priceText = GetLocalizedString("Р¦РµРЅР°: ", "Price: ", "Fiyat: ") + carPrice + GetLocalizedString(" РјРѕРЅРµС‚", " coins", " madeni para");
+            statusText.text = priceText;
+        }
+    }
+
+    private string GetLocalizedString(string englishText, string russianText, string turkishText)
+    {
+        string localizedText = russianText;
+
+        if (YandexGame.EnvironmentData.language == "en")
+        {
+            localizedText += englishText;
+        }
+        else if (YandexGame.EnvironmentData.language == "tr")
+        {
+            localizedText = turkishText;
         }
 
-  
+        return localizedText;
     }
 
     public void BuyCar()
     {
         if (coinText != null)
         {
-            int money = coinText.currentCoins; // Получаем количество монет из CoinText
+            int money = coinText.currentCoins; // РџРѕР»СѓС‡Р°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ РјРѕРЅРµС‚ РёР· CoinText
 
             if (PlayerPrefs.GetInt("CarBought_" + CarIndex, 0) != 1)
             {
                 if (money >= carPrice)
                 {
                     money -= carPrice;
-                    coinText.AddMoney(-carPrice); // Обновляем количество монет в CoinText, вычитая стоимость машины
+                    coinText.AddMoney(-carPrice); // РћР±РЅРѕРІР»СЏРµРј РєРѕР»РёС‡РµСЃС‚РІРѕ РјРѕРЅРµС‚ РІ CoinText, РІС‹С‡РёС‚Р°СЏ СЃС‚РѕРёРјРѕСЃС‚СЊ РјР°С€РёРЅС‹
                     PlayerPrefs.SetInt("CarBought_" + CarIndex, 1);
 
-                    // Установка машины как выбранной, если только что куплена
+                    // РЈСЃС‚Р°РЅРѕРІРєР° РјР°С€РёРЅС‹ РєР°Рє РІС‹Р±СЂР°РЅРЅРѕР№, РµСЃР»Рё С‚РѕР»СЊРєРѕ С‡С‚Рѕ РєСѓРїР»РµРЅР°
                     PlayerPrefs.SetInt("CurrentCar", CarIndex);
 
-                    // Обновляем информацию о кнопке
+                    // РћР±РЅРѕРІР»СЏРµРј РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РєРЅРѕРїРєРµ
                     UpdateInfo();
 
                     if (manager != null)
@@ -87,12 +103,12 @@ public class ShopButton : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Не хватает денег");
+                    Debug.Log("РќРµ С…РІР°С‚Р°РµС‚ РґРµРЅРµРі");
                 }
             }
             else
             {
-                Debug.Log("Машина уже куплена, назначить основной");
+                Debug.Log("РњР°С€РёРЅР° СѓР¶Рµ РєСѓРїР»РµРЅР°, РЅР°Р·РЅР°С‡РёС‚СЊ РѕСЃРЅРѕРІРЅРѕР№");
                 PlayerPrefs.SetInt("CurrentCar", CarIndex);
                 UpdateInfo();
 

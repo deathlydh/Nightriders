@@ -1,7 +1,7 @@
 using UnityEngine;
 using YG;
 using UnityEngine.UI;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
+
 
 public class CoinText : MonoBehaviour
 {
@@ -22,7 +22,7 @@ public class CoinText : MonoBehaviour
         UpdateCoins(currentCoins);
         YandexGame.FullscreenShow();
         FirstButtonReward.onClick.AddListener(delegate { ExampleOpenRewardAd(1); });
-
+        
         if (YandexGame.SDKEnabled)
         {
             LoadSaveCloud();

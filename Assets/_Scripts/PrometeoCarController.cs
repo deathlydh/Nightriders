@@ -1031,7 +1031,7 @@ public class PrometeoCarController : MonoBehaviour
         // Ваш метод начисления очков за дрифт.
     public void AddPointsIfDrifting()
     {
-        if (!pauseMenu.isPaused && Time.timeScale != 0 && isDrifting && enableDriftPoints && !timerBeforeAds.showingAd)
+        if (pauseMenu != null && !pauseMenu.isPaused && Time.timeScale != 0 && isDrifting && enableDriftPoints && !timerBeforeAds.showingAd)
         {
             // Начисляем очки за дрифт (может быть любая логика).
             driftPoints += 0.1f; // Например, каждый раз начисляем 10 очков.

@@ -10,7 +10,7 @@ public class VolumeInit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var volumeValue = PlayerPrefs.GetFloat(volumeParameter, volumeParameter == "MainSoundVol" ? -80f : -80f);
+        var volumeValue = PlayerPrefs.GetFloat(volumeParameter, volumeParameter == "MainSoundVol" ? 0f : 0f);
         mixer.SetFloat(volumeParameter, volumeValue);
     }
 

@@ -467,9 +467,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: fc237051992a9364d85da14475353b11, type: 3}
     m_FontSize: 14
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 30
@@ -623,9 +623,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: fc237051992a9364d85da14475353b11, type: 3}
     m_FontSize: 14
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 30
@@ -1001,9 +1001,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: fc237051992a9364d85da14475353b11, type: 3}
     m_FontSize: 14
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 30
@@ -1419,8 +1419,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "W,A,S,D - \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435
-    \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u0435\u043C"
+  m_Text: W,A,S,D - driving
 --- !u!222 &302612643
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1473,7 +1472,7 @@ MonoBehaviour:
   hi: 
   changeOnlyFont: 0
   fontNumber: 0
-  uniqueFont: {fileID: 12800000, guid: 1689f16629b36c349b7f8964dc2d8522, type: 3}
+  uniqueFont: {fileID: 0}
   additionalText: {fileID: 0}
   textHeight: 20
   processTranslateLabel: 3/3 completed
@@ -1515,8 +1514,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 103}
-  m_SizeDelta: {x: 200, y: 60}
+  m_AnchoredPosition: {x: 0, y: 51}
+  m_SizeDelta: {x: 300, y: 88.8607}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &367396893
 MonoBehaviour:
@@ -1769,6 +1768,7 @@ GameObject:
   - component: {fileID: 397417812}
   - component: {fileID: 397417811}
   - component: {fileID: 397417813}
+  - component: {fileID: 397417814}
   m_Layer: 5
   m_Name: Logo (1)
   m_TagString: Untagged
@@ -1808,7 +1808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1828,7 +1828,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Night riders\n\u30CA\u30A4\u30C8\u30E9\u30A4\u30C0\u30FC"
+  m_Text: Settings
 --- !u!222 &397417812
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1849,9 +1849,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &397417814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397417809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f34f36451b093ee4c83ad4aa5459d2ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textLComponent: {fileID: 397417811}
+  infoYG: {fileID: 11400000, guid: 162644796a8b0d044bce3d6fda0641e3, type: 2}
+  text: 
+  ru: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+  en: Settings
+  tr: Ayarlar
+  az: 
+  be: 
+  he: 
+  hy: 
+  ka: 
+  et: 
+  fr: 
+  kk: 
+  ky: 
+  lt: 
+  lv: 
+  ro: 
+  tg: 
+  tk: 
+  uk: 
+  uz: 
+  es: 
+  pt: 
+  ar: 
+  id: 
+  ja: 
+  it: 
+  de: 
+  hi: 
+  changeOnlyFont: 0
+  fontNumber: 0
+  uniqueFont: {fileID: 0}
+  additionalText: {fileID: 0}
+  textHeight: 20
+  processTranslateLabel: 3/3 completed
+  componentTextField: 1
+  countLang: 3
 --- !u!4 &414672645 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 4f32dfddb033d3e40b5841bc53cc1689, type: 3}
@@ -2274,8 +2324,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u041F\u0440\u043E\u0431\u0435\u043B - \u0440\u0443\u0447\u043D\u043E\u0439
-    \u0442\u043E\u0440\u043C\u043E\u0437"
+  m_Text: Space - handbrake
 --- !u!222 &527705827
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2329,7 +2378,7 @@ MonoBehaviour:
   hi: 
   changeOnlyFont: 0
   fontNumber: 0
-  uniqueFont: {fileID: 12800000, guid: 1689f16629b36c349b7f8964dc2d8522, type: 3}
+  uniqueFont: {fileID: 0}
   additionalText: {fileID: 0}
   textHeight: 20
   processTranslateLabel: 3/3 completed
@@ -2557,7 +2606,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0413\u0440\u043E\u043C\u043A\u043E\u0441\u0442\u044C \u044D\u0444\u0444\u0435\u043A\u0442\u043E\u0432\n"
+  m_Text: 'Effects Volume
+
+'
 --- !u!222 &571699926
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2625,7 +2676,7 @@ MonoBehaviour:
   hi: 
   changeOnlyFont: 0
   fontNumber: 0
-  uniqueFont: {fileID: 12800000, guid: 1689f16629b36c349b7f8964dc2d8522, type: 3}
+  uniqueFont: {fileID: 0}
   additionalText: {fileID: 0}
   textHeight: 20
   processTranslateLabel: 3/3 completed
@@ -4075,7 +4126,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "R - \u0432\u043E\u0437\u0432\u0440\u0430\u0442 \u043D\u0430 \u0434\u043E\u0440\u043E\u0433\u0443"
+  m_Text: R - return to road
 --- !u!222 &1052975415
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4128,7 +4179,7 @@ MonoBehaviour:
   hi: 
   changeOnlyFont: 0
   fontNumber: 0
-  uniqueFont: {fileID: 12800000, guid: 1689f16629b36c349b7f8964dc2d8522, type: 3}
+  uniqueFont: {fileID: 0}
   additionalText: {fileID: 0}
   textHeight: 20
   processTranslateLabel: 3/3 completed
@@ -4339,7 +4390,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: eda16a574f5cf654b832867016f588f6, type: 3}
+    m_Font: {fileID: 12800000, guid: 1689f16629b36c349b7f8964dc2d8522, type: 3}
     m_FontSize: 14
     m_FontStyle: 1
     m_BestFit: 1
@@ -4351,7 +4402,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0421\u0432\u043E\u0431\u043E\u0434\u043D\u0430\u044F \u0435\u0437\u0434\u0430"
+  m_Text: Free ride
 --- !u!222 &1325699801
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4419,7 +4470,7 @@ MonoBehaviour:
   hi: 
   changeOnlyFont: 0
   fontNumber: 0
-  uniqueFont: {fileID: 12800000, guid: eda16a574f5cf654b832867016f588f6, type: 3}
+  uniqueFont: {fileID: 0}
   additionalText: {fileID: 0}
   textHeight: 20
   processTranslateLabel: 3/3 completed
@@ -4462,8 +4513,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -250}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchoredPosition: {x: 0, y: -300}
+  m_SizeDelta: {x: 636.9538, y: 112.9495}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1350072715
 MonoBehaviour:
@@ -4582,7 +4633,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1350087349
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4773,9 +4824,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: fc237051992a9364d85da14475353b11, type: 3}
     m_FontSize: 14
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 30
@@ -4947,8 +4998,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -250}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchoredPosition: {x: 0, y: -300}
+  m_SizeDelta: {x: 636.9538, y: 112.9495}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1470279651
 MonoBehaviour:
@@ -5050,7 +5101,7 @@ MonoBehaviour:
   hi: 
   changeOnlyFont: 0
   fontNumber: 0
-  uniqueFont: {fileID: 12800000, guid: 1689f16629b36c349b7f8964dc2d8522, type: 3}
+  uniqueFont: {fileID: 0}
   additionalText: {fileID: 0}
   textHeight: 20
   processTranslateLabel: 0/3 completed
@@ -5092,7 +5143,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: eda16a574f5cf654b832867016f588f6, type: 3}
+    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
     m_FontSize: 14
     m_FontStyle: 1
     m_BestFit: 1
@@ -5624,8 +5675,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -250}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchoredPosition: {x: 0, y: -300}
+  m_SizeDelta: {x: 636.9538, y: 112.9495}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1677507940
 MonoBehaviour:
@@ -5902,8 +5953,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20, y: -20}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: -121, y: -74}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1860398266
 MonoBehaviour:
@@ -6098,7 +6149,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0413\u0440\u043E\u043C\u043A\u043E\u0441\u0442\u044C \u043C\u0443\u0437\u044B\u043A\u0438\n"
+  m_Text: 'Music volume
+
+'
 --- !u!222 &1903850855
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6166,7 +6219,7 @@ MonoBehaviour:
   hi: 
   changeOnlyFont: 0
   fontNumber: 0
-  uniqueFont: {fileID: 12800000, guid: 1689f16629b36c349b7f8964dc2d8522, type: 3}
+  uniqueFont: {fileID: 0}
   additionalText: {fileID: 0}
   textHeight: 20
   processTranslateLabel: 3/3 completed
@@ -6226,8 +6279,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -250}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchoredPosition: {x: 0, y: -300}
+  m_SizeDelta: {x: 636.9538, y: 112.9495}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1907367260
 MonoBehaviour:
@@ -6912,7 +6965,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435"
+  m_Text: Control
 --- !u!222 &2072079740
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6965,7 +7018,7 @@ MonoBehaviour:
   hi: 
   changeOnlyFont: 0
   fontNumber: 0
-  uniqueFont: {fileID: 12800000, guid: 1689f16629b36c349b7f8964dc2d8522, type: 3}
+  uniqueFont: {fileID: 0}
   additionalText: {fileID: 0}
   textHeight: 20
   processTranslateLabel: 3/3 completed
@@ -7036,7 +7089,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: eda16a574f5cf654b832867016f588f6, type: 3}
+    m_Font: {fileID: 12800000, guid: 1689f16629b36c349b7f8964dc2d8522, type: 3}
     m_FontSize: 14
     m_FontStyle: 1
     m_BestFit: 1
@@ -7048,7 +7101,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u041A\u0440\u0430\u0448-\u0440\u0435\u0436\u0438\u043C"
+  m_Text: Crash mode
 --- !u!222 &2092157719
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7101,7 +7154,7 @@ MonoBehaviour:
   hi: 
   changeOnlyFont: 0
   fontNumber: 0
-  uniqueFont: {fileID: 12800000, guid: eda16a574f5cf654b832867016f588f6, type: 3}
+  uniqueFont: {fileID: 0}
   additionalText: {fileID: 0}
   textHeight: 20
   processTranslateLabel: 3/3 completed
