@@ -47,26 +47,26 @@ public class ShopButton : MonoBehaviour
 
         if (currentCarIndex == CarIndex)
         {
-            statusText.text = GetLocalizedString("Выбрано", "Selected", "Seçildi");
+            statusText.text = GetLocalizedString("Selected", "Выбрано", "Seçildi");
         }
         else if (PlayerPrefs.GetInt("CarBought_" + CarIndex, 0) == 1)
         {
-            statusText.text = GetLocalizedString("Куплено", "Purchased", "Satın Alındı");
+            statusText.text = GetLocalizedString("Purchased", "Куплено", "Satın Alındı");
         }
         else
         {
-            string priceText = GetLocalizedString("Цена: ", "Price: ", "Fiyat: ") + carPrice + GetLocalizedString(" монет", " coins", " madeni para");
+            string priceText = GetLocalizedString("Price: ", "Цена: ", "Fiyat: ") + carPrice + GetLocalizedString(" coins", " монет", " madeni para");
             statusText.text = priceText;
         }
     }
 
-    private string GetLocalizedString(string englishText, string russianText, string turkishText)
+    private string GetLocalizedString(string defaultText, string russianText, string turkishText)
     {
-        string localizedText = russianText;
+        string localizedText = defaultText;
 
-        if (YandexGame.EnvironmentData.language == "en")
+        if (YandexGame.EnvironmentData.language == "ru")
         {
-            localizedText += englishText;
+            localizedText = russianText;
         }
         else if (YandexGame.EnvironmentData.language == "tr")
         {
